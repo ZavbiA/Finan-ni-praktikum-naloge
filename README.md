@@ -1,2 +1,2 @@
-# Finan-ni-praktikum-naloge
+# Financni-praktikum-naloge
 Tu bodo datoteke z vaj Finančnega praktikuma.
