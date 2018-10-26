@@ -9,7 +9,7 @@ library(tidyr)
 
 #uvoz tabele 2014
 
-tabela2014 <- read_csv("podatki_2014.csv",
+tabela2014 <- read_csv("Vaje1/podatki_2014.csv",
                        locale = locale(encoding = "UTF-8"))
 
 tabela2014[237:256] <- NULL
@@ -27,7 +27,7 @@ tabela2014[3:23] <- NULL
 
 #uvoz tabele 2015
 
-tabela2015 <- read_csv("podatki_2015.csv",
+tabela2015 <- read_csv("Vaje1/podatki_2015.csv",
                        locale = locale(encoding = "UTF-8"))
 
 tabela2015[237:257] <- NULL
@@ -45,7 +45,7 @@ tabela2015[3:22] <- NULL
 
 #uvoz tabele 2016
 
-tabela2016 <- read_csv("podatki_2016.csv",
+tabela2016 <- read_csv("Vaje1/podatki_2016.csv",
                        locale = locale(encoding = "UTF-8"))
 
 tabela2016[239:258] <- NULL
@@ -61,16 +61,15 @@ tabela2016[44:63] <- NULL
 tabela2016[23:42] <- NULL
 tabela2016[3:21] <- NULL
 
-#Združim v skupno tabelo.
+#Zdruzim v skupno tabelo.
 
-skupna_tabela <- t(cbind(tabela2014,tabela2015,tabela2016))
-skupna_tabela <- skupna_tabela[-c(1,14,27), ]
+skupna_tabela <- t(cbind(tabela2014[,-1],tabela2015[,-1],tabela2016[,-1]))
 colnames(skupna_tabela) <- c("1w","2w","1m","2m","3m","6m","9m","12m")
 
-#Narišem graf.
+#Narisem graf.
 
 obresti_6m <- ts(skupna_tabela[,"6m"], start=c(2014,1), frequency=12)
 obresti_12m <- ts(skupna_tabela[,"12m"], start=c(2014,1), frequency=12)
-ts.plot(obresti_6m, obresti_12m, gpars = list(xlab="Time", ylab="%"), col=c("orange","purple"))
+ts.plot(obresti_6m, obresti_12m, gpars = list(xlab="Time", ylab="%"), col=c("orange","purple"), lwd=2)
 title("Euribor")
-legend("topright", legend=c("6m", "12m"), fill = c("orange","purple"))
+legend("topright", legend = c("6m", "12m"), lwd=2, bty="n", col = c("orange", "purple"), cex = 1)
